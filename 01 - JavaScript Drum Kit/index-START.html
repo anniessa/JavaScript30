@@ -60,8 +60,34 @@
 
 <script>
 
+function playSound(e){
+  // attribute selector can be added onto the html tag using empty brackets []
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+
+  // selecting divs with a class of key
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    if(!audio) return; //stops function from running 
+    audio.currentTime = 0; //rewinds to the start so that you can play audio over and over again
+    audio.play();
+  // same as writing key.addClass('playing') in jQuery
+    key.classList.add('playing');
+};
+
+function removeTransition(e) { 
+  if(e.propertyName !== 'transform') return; //skip if it's not a transform
+  this.classList.remove('playing'); // transition end will fire and run removeTransition function, taking the class off 
+}
+
+// keys is a Node List, not an array, but you can loop over them like an array
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+window.addEventListener('keydown', playSound);
+
 </script>
 
 
 </body>
 </html>
+
+<!-- takeaways: key events, playing audio, listened for 'transitionend' event-->
+

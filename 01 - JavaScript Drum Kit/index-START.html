@@ -59,7 +59,6 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-
 function playSound(e){
   // attribute selector can be added onto the html tag using empty brackets []
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
@@ -90,4 +89,3 @@ window.addEventListener('keydown', playSound);
 </html>
 
 <!-- takeaways: key events, playing audio, listened for 'transitionend' event-->
-
